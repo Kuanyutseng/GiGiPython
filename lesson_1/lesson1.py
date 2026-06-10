@@ -10,7 +10,7 @@ married = True # only true or false
 # 印出目前變數 b 的值 (為 26)
 print(b)
 # 將變數 b 重新賦值為整數 10
-b = 10
+b = 11
 # 將變數 name 重新賦值為字串 "andy"
 name = "andy"
 # 印出更新後變數 b 的值 (為 10)
@@ -44,7 +44,7 @@ AGE = 12
 # 印出這三個不同變數進行數學運算後的值
 print(age + 1)  # 10 + 1 = 11
 print(Age + 2)  # 11 + 2 = 13
-print(AGE + 3)  # 12 + 3 = 15
+print(AGE + 4)  # 12 + 3 = 15
 
 # 變數命名的風格範例 (說明 Python 與 Java 的常用風格)
 # 駝峰式命名法 (Camel Case)，常用於 Java
