@@ -56,7 +56,7 @@ print(x > 3)            # 10 > 3 為 True -> True
 print("======")
 # 成員運算子 (Membership Operators)
 # list 是一個串列/清單
-list = ["apple", "banana", "cherry"]
+list = ["apple", "banana", "cherry", "apple"]
 print("cherry" in list) # 檢查 "cherry" 是否在 list 清單中 -> True
 print("melon"  in list) # 檢查 "melon" 是否在 list 清單中 -> False
-
+print(list)
