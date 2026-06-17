@@ -8,7 +8,8 @@ gigi = {
     "name": "gigi",
     "age": 26,
     "gender": "female",
-    "hobbies": ["golf", "sleep"]
+    "hobbies": ["golf", "sleep"],
+    
 }
 
 
