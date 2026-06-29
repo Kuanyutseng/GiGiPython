@@ -60,3 +60,5 @@ list = ["apple", "banana", "cherry", "apple"]
 print("cherry" in list) # 檢查 "cherry" 是否在 list 清單中 -> True
 print("melon"  in list) # 檢查 "melon" 是否在 list 清單中 -> False
 print(list)
+
+
