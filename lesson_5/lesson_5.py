@@ -24,7 +24,7 @@ for pet in pets:
 
 
 name = "gigilee" 
-for char in name: #['g','i','g','i','l','e','e']
+for char in name: 
     print(char)
 
 
