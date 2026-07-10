@@ -10,7 +10,7 @@ if 'milk' in cart:
         total_price -= 50
         print(total_price)
 else:
-    if is_vip == True:
+    if is_vip:
         wallet_balance -= 100
         print(wallet_balance)
     
