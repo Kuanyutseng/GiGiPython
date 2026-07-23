@@ -58,3 +58,6 @@ print(AGE + 4)  # 12 + 3 = 15
 print(name + ":" + str(age))
 # 透過 int() 將 married 變數強制轉換為整數型態並印出 (此處已是整數 1)
 print(int(married))
+
+
+

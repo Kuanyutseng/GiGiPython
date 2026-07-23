@@ -9,14 +9,22 @@ gigi = {
     "age": 26,
     "gender": "female",
     "hobbies": ["golf", "sleep"],
-    
+    "fridge": {
+        "apple": 3,
+        "orange": 4,
+    }
 }
 
 
 print(gigi)
 print(gigi["name"])
 print(gigi["hobbies"])
+print(gigi["fridge"]["apple"])
 
+# 我把gigi這個變數裡name的值，儲存在name這個變數裡
+name = gigi["name"]
+
+# 我把gigi這個變數裡lastName的值，變成lee
 gigi["lastName"] = "lee"
 print(gigi)
 

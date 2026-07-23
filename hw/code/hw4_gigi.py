@@ -26,6 +26,7 @@ has_child = False
 has_elder = False
 
 for visitor in visitors:
+    
     print("1.")
     print(visitor)
     #visitors['age']= age

@@ -1,4 +1,5 @@
 # []中括號 是陣列
+# 陣列的[]內，只能是數字，如果資料型態是字典，[]內可以是文字，但是需有被雙引號“包著
 list = ["apple", "banana", "cherry", "apple"]
 print(list)
 print(list[0]) #陣列一率重0開始
@@ -46,3 +47,4 @@ print(list2)
 list3 = list + list2
 print(list3)
 print("=" * 30)
+

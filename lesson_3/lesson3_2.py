@@ -7,4 +7,4 @@ print(tuple1)
 print(tuple1[0])
 
 thistuple = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
-print(thistuple[2:5]) #切片 結尾不包含
+print(thistuple[2:5]) #切片 頭包含，結尾不包含
