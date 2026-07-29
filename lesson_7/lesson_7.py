@@ -57,7 +57,7 @@ my_car.drive_in_sport_mode()
 my_car.sound_horn(3)
 my_car.drive_in_normal_mode()
 
-
+# set_mileage 是 打數值設定回去 (mileage 是物件本身的屬性)
 my_car.set_mileage(my_car.get_mileage() + 10)
 print(my_car.get_mileage())
 

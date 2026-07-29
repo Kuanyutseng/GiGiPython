@@ -3,16 +3,16 @@ class Person:
     self.firstname = fname
     self.lastname = lname
 
-  def printname(self):
+  def print_name(self):
     print(self.firstname, self.lastname)
 
 class Student(Person):
     def __init__(self, fname, lname, no):
-        super().__init__(fname, lname)
+        super().__init__(fname, lname) #super() 就是呼叫父類別(Person)的 __init__
         self.no = no
   
   
-    def printno(self):
+    def print_no(self):
   	    print(self.no)
   
   
@@ -25,12 +25,12 @@ class GoodStudent(Student):
 
 
 p1 = Person("John", "Doe")
-p1.printname()
+p1.print_name()
 
 x = Student("Mike", "Olsen", "002")
-x.printname()
-x.printno()
+x.print_name()
+x.print_no()
 
 gs = GoodStudent("Andy", "Tseng", "001")
-gs.printname()
-gs.printno()
+gs.print_name()
+gs.print_no()

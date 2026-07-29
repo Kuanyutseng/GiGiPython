@@ -3,6 +3,18 @@ for i in range(3): # range(3) => [0,1,2]
     print(i)
 
 
+
+students = [
+    {"name": "Andy", "s_no": "1"},
+    {"name": "John", "s_no": "2"},
+    {"name": "Lisa", "s_no": "3"}   
+]
+
+for student in students:
+    print(student)
+
+
+
 # 巢狀迴圈
 for i in range(3): # range(3) => [0,1,2]
     for j in range(3):
@@ -24,7 +36,7 @@ for pet in pets:
 
 
 name = "gigilee" 
-for char in name: 
+for char in name: # ['g', 'i', 'g', 'i', 'l', 'e', 'e']
     print(char)
 
 
@@ -40,7 +52,7 @@ for i in range(3):
 print("=" * 15) 
 
 # 這裡會判斷是否要結束迴圈，再打印
-for i in range(3):
+for i in range(5):
     if i == 1:
         break # 結束迴圈
     print(i)
@@ -50,7 +62,7 @@ for i in range(3):
 print("=" * 15)
 
 for i in range(5):
-    if i == 2:
+    if i == 1:
         continue #跳過 這一次的迴圈 後面一樣會繼續執行
     print(i)
 
@@ -70,10 +82,14 @@ print("=" * 30)
 
         #     for store in stores_data:
         #         #print(store)
-                
+                #    {"store_name" : "store1", 
+                #    "store_address": "taipei", 
+                #    "store_email": "house@gmail.com",
+                #    "store_phone": "1111",
+                #    "store_rating": 4.5}
         #         store_info = self._extract_store_info(store, available_value)
         #         if store_info not in save_list:
         #             save_list.append(store_info)
         #             print(f"新增店資料: {store_info}")
 
-        #     self.add_delay()
+        

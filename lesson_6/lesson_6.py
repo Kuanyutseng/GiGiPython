@@ -38,6 +38,7 @@ for i in range(3):
     say_hello_with_name(str(i))
     say_hello() #呼叫方法
 
+
 print(f_to_c(80))
 print(f_to_c_v1(32))
 print(f_to_c(50))
