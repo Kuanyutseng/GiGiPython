@@ -1,0 +1,118 @@
+綜合應用測驗 五 (涵蓋 Lesson 6 ~ 7)
+
+題目一：銀行帳戶交易模擬系統 (簡單)
+請撰寫一個 Python 程式，模擬銀行帳戶的存款、提款與轉帳流程，結合獨立函式（Lesson 6）與類別定義（Lesson 7）：
+
+【情境說明】
+設計一個銀行帳戶類別 BankAccount。每個帳戶有其持有人名稱與餘額，並可以執行存款與提款操作。另外設計一個獨立的轉帳函式，用來在兩個不同的帳戶物件之間進行資金轉移。
+
+【功能要求】
+1. 定義 BankAccount 類別：
+   - 類別初始化方法 __init__(self, owner, balance=0)：
+     - 需包含兩個屬性：持有人姓名 owner（字串）與帳戶餘額 balance（數字，預設為 0）。
+   - 存款方法 deposit(self, amount)：
+     - 若金額大於 0，將金額累加至 balance，並印出：「[持有人] 存入 [金額] 元，目前餘額：[最新餘額] 元。」。
+     - 若金額小於等於 0，不處理並印出錯誤提示。
+   - 提款方法 withdraw(self, amount)：
+     - 若提款金額大於當前帳戶餘額 balance，印出：「[持有人] 提款失敗：餘額不足！當前餘額：[最新餘額] 元。」，並返回 False。
+     - 若提款金額大於 0 且餘額充足，則將 balance 扣除該金額，印出：「[持有人] 成功提款 [金額] 元，目前餘額：[最新餘額] 元。」，並返回 True。
+     - 其他異常情況（如金額小於等於 0）返回 False。
+2. 定義轉帳函式 transfer(sender, receiver, amount)（此為 Lesson 6 的獨立函式，不屬於 BankAccount 類別）：
+   - 參數說明：
+     - sender：轉出帳戶的 BankAccount 物件。
+     - receiver：轉入帳戶的 BankAccount 物件。
+     - amount：要轉帳的金額。
+   - 轉帳邏輯：
+     - 呼叫 sender 物件的 withdraw(amount) 方法。
+     - 若 withdraw 回傳 True（代表扣款成功），則呼叫 receiver 物件的 deposit(amount) 方法進行存款，並印出：「轉帳成功！[寄件者] 轉帳 [金額] 元給 [收件者]。」。
+     - 若 withdraw 回傳 False（代表扣款失敗），則直接印出：「轉帳失敗：[寄件者] 餘額不足，無法轉帳給 [收件者]。」。
+3. 實作測試流程：
+   - 建立帳戶 Alice，初始餘額為 1000 元。
+   - 建立帳戶 Bob，初始餘額為 500 元。
+   - 依序模擬以下操作：
+     1. Alice 存款 200 元。
+     2. Alice 嘗試轉帳 1500 元給 Bob（預期失敗）。
+     3. Alice 嘗試轉帳 400 元給 Bob（預期成功）。
+     4. Bob 嘗試提款 1000 元（預期失敗）。
+     5. Bob 嘗試提款 300 元（預期成功）。
+
+【輸出範例】
+Alice 存入 200 元，目前餘額：1200 元。
+Alice 提款失敗：餘額不足！當前餘額：1200 元。
+轉帳失敗：Alice 餘額不足，無法轉帳給 Bob。
+Alice 成功提款 400 元，目前餘額：800 元。
+Bob 存入 400 元，目前餘額：900 元。
+轉帳成功！Alice 轉帳 400 元給 Bob。
+Bob 提款失敗：餘額不足！當前餘額：900 元。
+Bob 成功提款 300 元，目前餘額：600 元。
+
+--------------------------------------------------
+
+題目二：公司員工薪資與績效管理系統 (難)
+請撰寫一個 Python 程式，模擬公司的員工管理系統。利用類別繼承（Lesson 7）區分不同員工類型，並結合獨立的計算函式與字典（Lesson 6）來計算考績與發放薪資：
+
+【情境說明】
+某公司有兩種員工類型：一般正職員工 (Full-time Employee) 與時薪制派遣員工 (Hourly Employee)。每個人年終或月底會根據績效表現 (Performance Rating) 獲得調薪或獎懲，最終結算公司需要支出的總薪資。
+
+【功能要求】
+1. 定義父類別 Employee：
+   - 類別初始化方法 __init__(self, name, emp_id, base_salary)：
+     - 包含姓名 name、員工編號 emp_id 和基本底薪 base_salary。
+   - 薪資計算方法 calculate_pay(self)：
+     - 直接回傳基本底薪 base_salary。
+   - 資訊取得方法 get_details(self)：
+     - 回傳字串格式：「員工：[姓名] (ID: [員工編號])」。
+2. 定義子類別 FullTimeEmployee（繼承自 Employee）：
+   - 類別初始化方法 __init__(self, name, emp_id, base_salary, bonus)：
+     - 使用 super().__init__ 初始化父類別屬性，並額外增加年終獎金屬性 bonus。
+   - 複寫（Override）薪資計算方法 calculate_pay(self)：
+     - 回傳：基本底薪 base_salary + 年終獎金 bonus。
+3. 定義子類別 HourlyEmployee（繼承自 Employee）：
+   - 類別初始化方法 __init__(self, name, emp_id, hourly_rate, hours_worked)：
+     - 時薪員工沒有底薪，但有每小時時薪 hourly_rate 與工作時數 hours_worked。
+     - 使用 super().__init__ 初始化父類別，並將 base_salary 設為 0。
+     - 額外增加屬性：hourly_rate（時薪）與 hours_worked（工作時數）。
+   - 複寫（Override）薪資計算方法 calculate_pay(self)：
+     - 回傳：hourly_rate * hours_worked。
+4. 定義獨立的薪資與考績結算函式 process_company_payroll(employees, performance_ratings)（此為 Lesson 6 獨立函式）：
+   - 參數說明：
+     - employees：一個包含多個 Employee (或其子類別) 物件的清單。
+     - performance_ratings：一個字典，Key 為員工編號 emp_id，Value 為考績評等字串（"A"、"B" 或 "C"）。
+   - 處理邏輯：
+     - 遍歷 employees 清單中的每位員工，首先查詢 performance_ratings 字典中對應的績效。若字典中沒有該員工的編號，則考績預設為 "B"。
+     - 績效加成/扣減機制：
+       - 若考績為 "A" (表現優異)：
+         - 若為正職員工 (FullTimeEmployee)，其 bonus（年終獎金）增加 20%（即 bonus = bonus * 1.2，結果轉為整數），並印出：「[姓名] 績效優異！獎金提高為 [更新後獎金] 元。」。
+         - 若為時薪員工 (HourlyEmployee)，其 hourly_rate（時薪）增加 10 元，並印出：「[姓名] 績效優異！時薪調升 10 元。」。
+       - 若考績為 "C" (待加強)：
+         - 不論員工類型，其最終計算出的薪資皆需扣減 10%（即 calculate_pay() 的結果乘以 0.9，結果轉為整數），並印出：「[姓名] 績效待加強，本月實領薪資打 9 折。」。
+       - 若考績為 "B"：
+         - 薪資與獎金維持不變，不需印出調整訊息。
+     - 計算每位員工的最終實領薪資，並印出員工的結算資訊，格式為：「[員工詳細資訊] - 績效：[評等]，實領薪資：[最終薪資] 元。」。
+     - 統計並計算本次發放的所有員工薪資總和。
+     - 處理完所有員工後，印出公司總支出：「公司本次總計支出薪資：[總額] 元。」。
+5. 實作測試資料：
+   - 建立員工清單，包含以下員工：
+     - 正職員工 Emily (ID: FT001)，底薪 50000 元，獎金 10000 元。
+     - 正職員工 David (ID: FT002)，底薪 45000 元，獎金 8000 元。
+     - 時薪員工 Helen (ID: HE001)，時薪 200 元，工作 120 小時。
+     - 時薪員工 Jack (ID: HE002)，時薪 180 元，工作 150 小時。
+   - 建立考績字典：
+     ```python
+     performance_ratings = {
+         "FT001": "A",
+         "FT002": "C",
+         "HE001": "A"
+         # Jack 的考績未提供，預設應為 B
+     ```
+   - 呼叫 process_company_payroll(employees, performance_ratings) 進行結算。
+
+【輸出範例】
+Emily 績效優異！獎金提高為 12000 元。
+員工：Emily (ID: FT001) - 績效：A，實領薪資：62000 元。
+David 績效待加強，本月實領薪資打 9 折。
+員工：David (ID: FT002) - 績效：C，實領薪資：47700 元。
+Helen 績效優異！時薪調升 10 元。
+員工：Helen (ID: HE001) - 績效：A，實領薪資：25200 元。
+員工：Jack (ID: HE002) - 績效：B，實領薪資：27000 元。
+公司本次總計支出薪資：161900 元。
