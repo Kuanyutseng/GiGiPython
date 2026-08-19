@@ -10,3 +10,12 @@ inventory = {
 shopping_cart = ["apple", "watermelon", "banana", "orange", "peach"]
 is_vip = True
 total_payment = 0
+
+
+visitors = [
+    {'age':35,'express_pass':True},
+    {'age':8,'express_pass':False},
+    {'age':70,'express_pass':True},
+    {'age':15,'express_pass':False},
+    {'age':-2,'express_pass':False}
+]
