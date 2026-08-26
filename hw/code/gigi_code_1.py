@@ -1,3 +1,4 @@
+
 class Employee:
     def __init__(self, name, emp_id, base_salary):
         self.name=name
@@ -7,7 +8,6 @@ class Employee:
         return self.base_salary
     def get_details(self):
         return '員工：'+ self.name +' ('+'ID:'+ self.emp_id +')'
-
 
 class FullTimeEmployee(Employee):
     def __init__(self, name, emp_id, base_salary, bonus):
@@ -38,6 +38,8 @@ def process_company_payroll(employees, performance_ratings):
                 employee.bonus = int(employee.bonus)
                 print(employee.name+'績效優異！獎金提高為'+ str(employee.bonus)+' 元。')
                 emp_pay=employee.calculate_pay()
+                # 員工：Helen (ID: HE001) - 績效：A，實領薪資：25200 元。
+                print(employee.get_details()+' 績效：'+ performance_ratings[employee.emp_id]+'，實領薪資：'+ str(emp_pay)+' 元。')
             else:
                 employee.hourly_rate +=10
                 print(employee.name+'績效優異！時薪調升'+ str(employee.hourly_rate)+' 元。')
@@ -51,9 +53,11 @@ def process_company_payroll(employees, performance_ratings):
         
     print('公司本次總計支出薪資：' + str(total_payment) + ' 元')
 
+
+performance_ratings={'FT001':'A','FT002':'C','HE001':'A'}
 Emily=FullTimeEmployee('Emily','FT001',50000,10000)
 David=FullTimeEmployee('David','FT002',45000,8000)
 Helen=HourlyEmployee('Helen','HE001',200,120)
 Jack=HourlyEmployee('Jack','HE002',180,150)
-performance_ratings={'FT001':'A','FT002':'C','HE001':'A'}
+print(performance_ratings)
 process_company_payroll([Emily,David,Helen,Jack],performance_ratings)
