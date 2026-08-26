@@ -28,6 +28,7 @@ class HourlyEmployee(Employee):
 def process_company_payroll(employees, performance_ratings):
     total_payment=0
     for employee in employees:
+        
         emp_pay=0
         if employee.emp_id not in performance_ratings:
             performance_ratings[employee.emp_id]='B'
