@@ -1,0 +1,102 @@
+綜合應用測驗 六 (涵蓋 Lesson 1 ~ 7)
+
+題目一：電商購物車結算與折扣計算系統 (基礎與資料結構整合)
+
+【題目說明】
+請編寫一個函式 calculate_cart_total(cart, coupon_code="")，用來計算購物車最終結算金額：
+
+1. 購物車 cart 為包含多個商品字典的串列，範例格式如下：
+   [
+       {"name": "蘋果", "price": 30, "qty": 6},
+       {"name": "牛奶", "price": 80, "qty": 2},
+       {"name": "餅乾", "price": 50, "qty": 5}
+   ]
+
+2. 折扣計算規則：
+   - 若單一商品的購買數量 qty >= 5，該商品小計享有 9 折優惠。
+   - 折價券 coupon_code：
+     - "SAVE100"：打折後的總金額若滿 500 元，折抵 100 元 (未滿 500 元不折抵)。
+     - "HALF"：總金額打 5 折。
+     - 其他或空字串 ""：無額外折抵。
+
+3. 函式回傳格式：
+   請回傳一個包含 "original_total" (原價總金額), "discount_amount" (總共省下的金額), "final_total" (最終應付金額) 的字典 (數值請保留一位小數)。
+
+【測試資料】
+購物車：蘋果 (單價 30, 數量 6)、牛奶 (單價 80, 數量 2)、餅乾 (單價 50, 數量 5)
+折價券代碼："SAVE100"
+
+【輸出範例】
+購物車結算結果：{'original_total': 590, 'discount_amount': 143.0, 'final_total': 447.0}
+
+--------------------------------------------------
+
+題目二：圖書館藏與 VIP 借閱權限管理系統 (較難 - OOP 與邏輯整合)
+請撰寫一個 Python 程式，模擬圖書館的館藏管理與會員借閱系統。利用類別繼承（Lesson 7）區分不同會員等級，並結合館藏字典與條件邏輯（Lesson 1 ~ 6）：
+
+【情境說明】
+圖書館開放會員借閱圖書，分為「一般會員」與「VIP 會員」。VIP 會員擁有更高的借閱數量上限以及「珍藏庫圖書」的專屬借閱權限。
+
+【功能要求】
+1. 定義基底類別 Member (一般會員)：
+   - 初始化方法 __init__(self, name, member_id)：
+     - 包含姓名 name (字串)、會員編號 member_id (字串)。
+     - 包含已借圖書清單 borrowed_books (串列 list，預設為空清單 [])。
+     - 包含最大借閱上限 max_books (整數，預設為 3)。
+   - 借書方法 borrow_book(self, book_title)：
+     - 若當前已借圖書數量 len(self.borrowed_books) >= self.max_books，印出：「[姓名] 借書失敗：已達借閱上限 ([max_books]本)」，並返回 False。
+     - 若 book_title 已存在於 borrowed_books 中，印出：「[姓名] 借書失敗：已借閱過《[書名]》」，並返回 False。
+     - 若通過檢查，將 book_title 加入 borrowed_books，印出：「[姓名] 成功借閱《[書名]》」，並返回 True。
+   - 還書方法 return_book(self, book_title)：
+     - 若 book_title 存在於 borrowed_books 中，將其移除，印出：「[姓名] 成功歸還《[書名]》」，並返回 True。
+     - 若不在已借清單中，印出：「[姓名] 歸還失敗：未借閱《[書名]》」，並返回 False。
+
+2. 定義子類別 VIPMember（繼承自 Member）：
+   - 初始化方法 __init__(self, name, member_id)：
+     - 使用 super().__init__(name, member_id) 初始化父類別屬性。
+     - 將借閱上限 max_books 重新設定為 5 本。
+     - 新增特權清單屬性 perks (串列 list，預設包含 ["館藏優先預約", "珍藏庫借閱"])。
+   - 專屬借書方法 borrow_special_book(self, book_title, is_rare=False)：
+     - 若 is_rare 為 True，檢查 "珍藏庫借閱" 是否存在於 perks 特權清單中。若不在列表中，印出：「[姓名] 借書失敗：無珍藏庫借閱權限」，並返回 False。
+     - 若權限無誤或非珍藏書，呼叫 self.borrow_book(book_title) 執行實際借閱並回傳其結果。
+
+3. 定義 Library 類別 (圖書館管理系統)：
+   - 初始化方法 __init__(self)：
+     - 包含館藏字典 inventory (Key 為書名，Value 為庫存數量整數)。
+   - 增加館藏方法 add_book(self, book_title, count=1)：
+     - 若書名已在 inventory 中則累加庫存數量，若不在則新增該項目。
+   - 處理借閱方法 process_borrow(self, member, book_title, is_rare=False)：
+     - 檢查 inventory 中 book_title 的庫存是否 > 0。若無庫存或不存在，印出：「圖書館系統：《[書名]》目前無庫存！」，並返回 False。
+     - 判斷書籍是否為珍藏圖書 (is_rare=True)：
+       - 若 is_rare 為 True，需驗證 member 是否為 VIPMember 類別實例 (可使用 isinstance(member, VIPMember))。
+       - 若 member 為 VIPMember，呼叫其 borrow_special_book(book_title, is_rare=True)。
+       - 若 member 僅為一般 Member，印出：「圖書館系統：普通會員 [[姓名]] 無法借閱珍藏圖書《[書名]》！」，並返回 False。
+     - 若為一般圖書 (is_rare=False)，直接呼叫 member.borrow_book(book_title)。
+     - 若會員成功借出圖書，將 inventory[book_title] 扣減 1，並印出：「圖書館系統：《[書名]》庫存剩餘 [最新庫存] 本」，最後回傳 True。
+
+4. 實作測試流程：
+   - 建立 Library 物件 lib，並新增館藏：
+     - "Python 基礎教學"：2 本
+     - "古董手稿 (珍藏)"：1 本
+   - 建立一般會員 Andy (編號 "M001")。
+   - 建立 VIP 會員 GiGi (編號 "V888")。
+   - 依序模擬以下操作：
+     1. Andy 嘗試借閱 "Python 基礎教學" (非珍藏書，預期成功)。
+     2. Andy 嘗試借閱 "古董手稿 (珍藏)" (珍藏書，預期失敗 - 權限不足)。
+     3. GiGi 嘗試借閱 "古董手稿 (珍藏)" (珍藏書，預期成功)。
+     4. GiGi 嘗試再次借閱 "古董手稿 (珍藏)" (珍藏書，預期失敗 - 庫存不足)。
+
+【輸出範例】
+=== 測試 1：普通會員借普通書 ===
+[Andy] 成功借閱《Python 基礎教學》
+圖書館系統：《Python 基礎教學》庫存剩餘 1 本
+
+=== 測試 2：普通會員嘗試借珍藏書 ===
+圖書館系統：普通會員 [Andy] 無法借閱珍藏圖書《古董手稿 (珍藏)》！
+
+=== 測試 3：VIP 會員借珍藏書 ===
+[GiGi] 成功借閱《古董手稿 (珍藏)》
+圖書館系統：《古董手稿 (珍藏)》庫存剩餘 0 本
+
+=== 測試 4：重複借閱與庫存不足 ===
+圖書館系統：《古董手稿 (珍藏)》目前無庫存！

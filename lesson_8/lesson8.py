@@ -1,8 +1,8 @@
 # 引入json library
 import json
 # object to json
-array = ["apple", "banana", "cherry"]
-print(array)
+array = ["apple", "banana", "cherry", 'hello world']
+print(array) #
 
 json_string = json.dumps(array)
 print(json_string)

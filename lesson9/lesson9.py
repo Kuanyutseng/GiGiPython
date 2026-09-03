@@ -7,7 +7,7 @@ try:
 except ZeroDivisionError as e:
     print("this is my ZeroDivisionError: " + str(e))
 except TypeError as e:
-    print("this is my TypeError: " + str(e))
+    print("this is my TypeError: " + str(e))    
 except Exception as e:
     print("this is my error: " + str(e))
 finally:
